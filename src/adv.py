@@ -89,7 +89,7 @@ def run():
     while begin == True:
         print('What next?')
         command = input(
-            f'n = north, s = south, e = east, w = west, get {[i.name for i in newPlayer.current_room.items]}, drop {[i.name for i in newPlayer.items]}, q = quit \n')
+            f'n = north, s = south, e = east, w = west, get {[i.name for i in newPlayer.current_room.items]}, drop {[i.name for i in newPlayer.items]}, i = Inventory, q = quit \n')
         if command == 'q':
             begin = False
         elif command == 'n':
@@ -141,6 +141,10 @@ def run():
                     f"Items {[i.name for i in newPlayer.current_room.items]}  are now in {newPlayer.current_room.name} ")
             else:
                 print('No available items to drop.')
+        elif command == 'i':
+            print('Your Inventory')
+            for x in newPlayer.items:
+                print(f"{x.name}")
 
 
 run()
