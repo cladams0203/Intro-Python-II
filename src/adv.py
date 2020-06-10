@@ -63,14 +63,15 @@ newPlayer = Player('Chris', room['outside'], [Item('FlashLight')])
 
 
 def getItem(a):
-    newItem = newPlayer.current_room.items[int(a)]
-    newPlayer.items.append(newItem)
-    newPlayer.current_room.items.pop(int(a))
+    for x in range(len(a)):
+        newPlayer.items.append(newPlayer.current_room.items[x - 1])
+        newPlayer.current_room.items.pop(x - 1)
 
 
 def dropItem(a):
-    newPlayer.current_room.items.append(newPlayer.items[int(a)])
-    newPlayer.items.pop(int(a))
+    for x in range(len(a)):
+        newPlayer.current_room.items.append(newPlayer.items[x - 1])
+        newPlayer.items.pop(x - 1)
 
 
 def start():
@@ -123,7 +124,7 @@ def run():
                 for idx, item in enumerate(newPlayer.current_room.items):
                     print(f'{idx}: {item.name}')
                 selectItem = input('Enter the number for your selection: ')
-                getItem(selectItem)
+                getItem(selectItem.split(' '))
                 print(f"Player now has: {[i.name for i in newPlayer.items]}")
             else:
                 print('No available items')
@@ -133,10 +134,9 @@ def run():
                 for idx, item in enumerate(newPlayer.items):
                     print(f"{idx}: {item.name}")
                 selectItem = input('Enter the number of your selection: ')
-                droppedItem = newPlayer.items[int(selectItem)]
-                dropItem(selectItem)
+                dropItem(selectItem.split(' '))
                 print(
-                    f"Player has dropped {droppedItem.name} in {newPlayer.current_room.name} ")
+                    f"Items {[i.name for i in newPlayer.current_room.items]}  are now in {newPlayer.current_room.name} ")
             else:
                 print('No available items to drop.')
 
