@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -38,7 +38,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-
+newPlayer = Player('Chris', room['outside'])
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,5 +49,48 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-print('What do you want to do?')
-command = input('n = north, s = south, e = east, w = west \n')
+
+
+def start():
+    print(
+        f"Player {newPlayer.name}, you are in room {newPlayer.current_room.name}")
+
+
+start()
+
+
+def run():
+    begin = True
+    while begin == True:
+        print('What next?')
+        command = input(
+            'n = north, s = south, e = east, w = west, q = quit \n')
+        if command == 'q':
+            begin = False
+        elif command == 'n':
+            if hasattr(newPlayer.current_room, 'n_to'):
+                newPlayer.current_room = newPlayer.current_room.n_to
+                print(f"You are now in the {newPlayer.current_room.name}")
+            else:
+                print('You cannot move that way')
+        elif command == 's':
+            if hasattr(newPlayer.current_room, 's_to'):
+                newPlayer.current_room = newPlayer.current_room.s_to
+                print(f"You are now in the {newPlayer.current_room.name}")
+            else:
+                print('You cannot move that way')
+        elif command == 'e':
+            if hasattr(newPlayer.current_room, 'e_to'):
+                newPlayer.current_room = newPlayer.current_room.e_to
+                print(f"You are now in the {newPlayer.current_room.name}")
+            else:
+                print('You cannot move that way')
+        elif command == 'w':
+            if hasattr(newPlayer.current_room, 'w_to'):
+                newPlayer.current_room = newPlayer.current_room.w_to
+                print(f"You are now in the {newPlayer.current_room.name}")
+            else:
+                print('You cannot move that way')
+
+
+run()
