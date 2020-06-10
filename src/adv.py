@@ -64,12 +64,14 @@ newPlayer = Player('Chris', room['outside'], [Item('FlashLight')])
 
 def getItem(a):
     for x in range(len(a)):
+        newPlayer.current_room.items[x - 1].onTake()
         newPlayer.items.append(newPlayer.current_room.items[x - 1])
         newPlayer.current_room.items.pop(x - 1)
 
 
 def dropItem(a):
     for x in range(len(a)):
+        newPlayer.items[x - 1].onDrop()
         newPlayer.current_room.items.append(newPlayer.items[x - 1])
         newPlayer.items.pop(x - 1)
 
